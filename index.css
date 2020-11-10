@@ -19,3 +19,12 @@ img:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.7);
 }
+
+h3, p {
+    text-align: center;
+}
+
+p {
+    border: 1px solid black;
+    border-radius: 50%;
+}
