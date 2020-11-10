@@ -44,22 +44,22 @@ const genOnePokedex = async ( name ) => {
     // pokemonInfo();
 }
 
-const genOne = async () => {
-    try {
-        let res = await fetch( `https://pokeapi.co/api/v2/pokedex/kanto` );
-        let pokemon = await res.json();
+// const genOne = async () => {
+//     try {
+//         let res = await fetch( `https://pokeapi.co/api/v2/pokedex/kanto` );
+//         let pokemon = await res.json();
 
-        pokemon.pokemon_entries.forEach( p => {
-            genOnePokedex( p.entry_number )
-        } )
-    }
-    catch ( e ) {
-        console.log( e )
-    }
+//         pokemon.pokemon_entries.forEach( p => {
+//             genOnePokedex( p.entry_number )
+//         } )
+//     }
+//     catch ( e ) {
+//         console.log( e )
+//     }
 
-}
+// }
 
-genOne()
+// genOne();
 
 const getOtherGens = async ( generation ) => {
     try {
@@ -79,6 +79,13 @@ const getOtherGens = async ( generation ) => {
 
 }
 
+getOtherGens( 'kanto' );
+
+const kanto = document.querySelector( '.kanto' );
+kanto.addEventListener( 'click', ( e ) => events( e ) );
+
+
+
 const events = ( e ) => {
     let container = document.querySelector( '.container' );
     while ( container.firstChild ) {
@@ -88,12 +95,13 @@ const events = ( e ) => {
     console.log( e.target.value )
 }
 
-let hoenn = document.querySelector( '.hoenn' );
+const hoenn = document.querySelector( '.hoenn' );
 hoenn.addEventListener( 'click', ( e ) => {
     events( e );
 } )
 
-let johto = document.querySelector( '.updated-johto' );
+const johto = document.querySelector( '.updated-johto' );
 johto.addEventListener( 'click', ( e ) => {
     events( e );
 } )
+
