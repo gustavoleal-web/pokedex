@@ -4,11 +4,14 @@
     margin-left: 200px;
 }
 
+.basic {
+    display: flex;
+}
+
 .border {
     border: 1px solid black;
-    margin: 0 5px; 
+    margin: 0px 10px 60px 10px; 
     width: 200px;
-    margin: 0 10px;
 }
 
 img {
@@ -30,14 +33,3 @@ p {
     /* border-radius: 50%; */
 }
 
-.fire {
-    background-color: red;
-}
-
-.water {
-    background-color: blue;
-}
-
-.flying {
-    background-color: burlywood;
-}
