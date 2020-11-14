@@ -2,12 +2,12 @@ const colorTypes = ( typeOne, typeTwo ) => {
     const type1 = typeOne.innerText.trim();
     typeOne.classList.add( type1 )
 
-//not all pokemons have 2 types so it's only created if it exists
+    //not all pokemons have 2 types so it's only created if it exists
     if ( typeTwo.innerText ) {
         const type2 = typeTwo.innerText.trim()
         typeTwo.classList.add( type2 )
     }
-   
+
 
 }
 
@@ -46,11 +46,12 @@ const getPokedex = async ( name = 'charmander' ) => {
     try {
         res = await fetch( `https://pokeapi.co/api/v2/pokemon/${ name }/` );
         uniquePkm = await res.json();
+
+
     }
     catch ( e ) {
         throw ( e );
     }
-
 
     let div = document.createElement( 'div' );
     let img = document.createElement( 'img' );
@@ -60,6 +61,7 @@ const getPokedex = async ( name = 'charmander' ) => {
     let typeTwo = document.createElement( 'p' );
     let pokTypes = uniquePkm.types;
 
+    //A pokemon has at most 2 types
     if ( pokTypes.length === 2 ) {
         typeOne.innerText = `${ pokTypes[ 0 ].type.name } `;
         typeTwo.innerText = `${ pokTypes[ 1 ].type.name } `;
@@ -68,15 +70,6 @@ const getPokedex = async ( name = 'charmander' ) => {
     }
 
     colorTypes( typeOne, typeTwo );
-
-
-    // for ( let i = 0; i < pokTypes.length; i++ ) {
-    //     p.innerText += `${ pokTypes[ i ].type.name } `;
-    //     if ( pokTypes[ i ].type.name === 'fire' ) {
-    //         p.classList.add( 'fire' )
-    //     }
-    // }
-
 
     img.src = uniquePkm.sprites.other.dream_world.front_default;
     h3.innerText = name;
@@ -90,14 +83,6 @@ const getPokedex = async ( name = 'charmander' ) => {
 
     getAbilities( div, img, uniquePkm )
 
-
-    // const pokemonInfo = () => {
-    //     div.addEventListener( 'click', ( e ) => {
-    //         console.log( uniquePkm.moves[ 0 ].version_group_details)
-    //     } );
-    // }
-
-    // pokemonInfo();
 }
 
 
@@ -106,7 +91,7 @@ const getOtherGens = async ( generation ) => {
         let res = await fetch( `https://pokeapi.co/api/v2/pokedex/${ generation }` );
         let pokemon = await res.json();
         pokemon.pokemon_entries.forEach( p => {
-            //Pokemon does not have data over this pokemon
+            //Pokemon API does not have data about this pokemon
             if ( p.pokemon_species.name === 'deoxys' ) {
                 return;
             }
@@ -123,11 +108,6 @@ getPokedex()
 
 //getOtherGens( 'kanto' );
 
-const kanto = document.querySelector( '.kanto' );
-kanto.addEventListener( 'click', ( e ) => events( e ) );
-
-
-
 const events = ( e ) => {
     let container = document.querySelector( '.container' );
     while ( container.firstChild ) {
@@ -136,13 +116,12 @@ const events = ( e ) => {
     getOtherGens( e.target.value );
 }
 
+const kanto = document.querySelector( '.kanto' );
+kanto.addEventListener( 'click', ( e ) => events( e ) );
+
 const hoenn = document.querySelector( '.hoenn' );
-hoenn.addEventListener( 'click', ( e ) => {
-    events( e );
-} )
+hoenn.addEventListener( 'click', ( e ) => events( e ) );
 
 const johto = document.querySelector( '.updated-johto' );
-johto.addEventListener( 'click', ( e ) => {
-    events( e );
-} )
+johto.addEventListener( 'click', ( e ) => events( e ) );
 
