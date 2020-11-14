@@ -24,12 +24,26 @@ img:hover {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-h3, h4, p {
-    text-align: center;
+h4 {
+    font-size: 20px; 
+    font-weight: 600; 
+    text-align: center; 
+
+}
+
+h3 {
+      font-size: 18px; 
+      font-weight: 800; 
+      text-align: center; 
+      text-transform: uppercase; 
 }
 
 p {
+    text-transform: capitalize;
+    text-align: center;
     border: 1px solid black;
-    /* border-radius: 50%; */
+    font-size: 17px; 
+    font-weight: 600; 
+    box-shadow: inset 0 0 5px;
 }
 
