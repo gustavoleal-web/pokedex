@@ -6,7 +6,9 @@ body {
     display         : flex;
     justify-content : flex-start;
     margin-bottom   : 40px;
-    background-color: black;
+    margin-top: 10px;
+    background-color: rgba(195, 193, 193, 0.623);
+    border-radius: 20px;
 }
 
 button {
@@ -22,8 +24,8 @@ button {
 
 button:hover {
     cursor          : pointer;
-    background-color: rgb(170, 253, 87);
-    color           : white;
+    background-color: white;
+    color           : lightseagreen;
     font-weight     : 700;
 }
 
@@ -106,3 +108,4 @@ p {
         width: 100%;
     }
 }
+
