@@ -40,7 +40,7 @@ const getAbilities = ( div, img, uniquePkm ) => {
 }
 
 
-const getPokedex = async ( name = 'charmander' ) => {
+const getPokedex = async ( name ) => {
     let res;
     let uniquePkm;
     try {
@@ -50,9 +50,23 @@ const getPokedex = async ( name = 'charmander' ) => {
 
     }
     catch ( e ) {
-        throw ( e );
+        //API is missing data on certain pokemons
+        if ( res.status === 404 ) {
+            let container = document.querySelector( '.container' );
+            let div = document.createElement( 'div' );
+            let h3 = document.createElement( 'h3' );
+            h3.textContent = `No data for ${ name } found.`;
+            container.appendChild( div )
+            div.appendChild( h3 )
+
+        }
+        else {
+            throw ( e );
+        }
+        return false;
     }
 
+    console.log( uniquePkm.id )
     let div = document.createElement( 'div' );
     let img = document.createElement( 'img' );
     let h3 = document.createElement( 'h3' );
@@ -86,7 +100,7 @@ const getPokedex = async ( name = 'charmander' ) => {
 }
 
 
-const getOtherGens = async ( generation ) => {
+const getGen = async ( generation ) => {
     try {
         let res = await fetch( `https://pokeapi.co/api/v2/pokedex/${ generation }` );
         let pokemon = await res.json();
@@ -104,17 +118,20 @@ const getOtherGens = async ( generation ) => {
 
 }
 
-getPokedex()
-
-//getOtherGens( 'kanto' );
 
 const events = ( e ) => {
     let container = document.querySelector( '.container' );
+    //removes the current pokemon to render the new ones
+    //otherwise they will be added underneat the current ones
     while ( container.firstChild ) {
         container.removeChild( container.lastChild );
     }
-    getOtherGens( e.target.value );
+    getGen( e.target.value );
 }
+
+
+getGen( 'kanto' );
+
 
 const kanto = document.querySelector( '.kanto' );
 kanto.addEventListener( 'click', ( e ) => events( e ) );
@@ -124,4 +141,9 @@ hoenn.addEventListener( 'click', ( e ) => events( e ) );
 
 const johto = document.querySelector( '.updated-johto' );
 johto.addEventListener( 'click', ( e ) => events( e ) );
+
+const sinnoh = document.querySelector( '.original-sinnoh' );
+sinnoh.addEventListener( 'click', ( e ) => {
+    events( e );
+} )
 
